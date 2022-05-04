@@ -142,3 +142,6 @@
 2022-05-04 14:06:56,873 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
 2022-05-04 14:06:57,550 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
 2022-05-04 14:06:57,566 [1] INFO Microsoft.Hosting.Lifetime - Content root path: C:\Projects\Test\dotnetcore-log4net-webapi\dotnetcore-log4net-webapi
+2022-05-04 14:15:09,860 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2022-05-04 14:15:11,550 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2022-05-04 14:15:11,579 [1] INFO Microsoft.Hosting.Lifetime - Content root path: C:\Projects\Test\dotnetcore-log4net-webapi\dotnetcore-log4net-webapi
