@@ -51,10 +51,13 @@ namespace dotnetcore_log4net_webapi
 
             app.UseAuthorization();
 
+            app.UseMiddleware<RequestLoggingMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
