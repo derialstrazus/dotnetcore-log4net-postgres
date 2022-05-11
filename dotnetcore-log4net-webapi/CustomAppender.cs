@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace dotnetcore_log4net_webapi
 {
 	public class CustomAppender : AdoNetAppender
-	{
+	{ 
 		protected override void SendBuffer(IDbTransaction dbTran, LoggingEvent[] events)
 		{
 			if (CommandText != null && CommandText.Trim() != "")
