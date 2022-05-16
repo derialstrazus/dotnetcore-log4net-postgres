@@ -9,10 +9,24 @@ using System.Threading.Tasks;
 namespace dotnetcore_log4net_webapi
 {
 	public class CustomAppender : AdoNetAppender
-	{ 
+	{
+		public new string ConnectionString
+		{
+			get
+			{
+				return base.ConnectionString;
+			}
+			set
+			{
+				base.ConnectionString = "Host=localhost;Port=5432;Database=cocktails;Username=postgres;Password=postgres;";
+			}
+		}
+
 		protected override void SendBuffer(IDbTransaction dbTran, LoggingEvent[] events)
 		{
-			if (CommandText != null && CommandText.Trim() != "")
+            //ConnectionString = "Host=localhost;Port=5432;Database=cocktails;Username=postgres;Password=postgres;";
+
+            if (CommandText != null && CommandText.Trim() != "")
 			{
 				using (IDbCommand dbCmd = Connection.CreateCommand())
 				{
