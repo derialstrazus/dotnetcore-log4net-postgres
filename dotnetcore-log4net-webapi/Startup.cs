@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Xml;
+using System.Reflection;
 
 namespace dotnetcore_log4net_webapi
 {
@@ -58,6 +60,15 @@ namespace dotnetcore_log4net_webapi
             {
                 endpoints.MapControllers();
             });
+
+            XmlDocument xmlDocument = new XmlDocument();
+
+            var repo = log4net.LogManager.CreateRepository(Assembly.GetEntryAssembly(),
+               typeof(log4net.Repository.Hierarchy.Hierarchy));
+
+            xmlDocument.Load("testlog4net.xml");
+
+            log4net.Config.XmlConfigurator.Configure(xmlDocument["log4net"]);
 
         }
     }
