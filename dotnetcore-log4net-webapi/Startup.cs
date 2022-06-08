@@ -39,7 +39,7 @@ namespace dotnetcore_log4net_webapi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -54,21 +54,17 @@ namespace dotnetcore_log4net_webapi
 
             app.UseAuthorization();
 
+            XmlDocument xmlDocument = new XmlDocument();
+
+            xmlDocument.Load("testlog4net.xml");
+            log4net.Config.XmlConfigurator.Configure(xmlDocument["log4net"]);
+
             app.UseMiddleware<RequestLoggingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
-            XmlDocument xmlDocument = new XmlDocument();
-
-            var repo = log4net.LogManager.CreateRepository(Assembly.GetEntryAssembly(),
-               typeof(log4net.Repository.Hierarchy.Hierarchy));
-
-            xmlDocument.Load("testlog4net.xml");
-
-            log4net.Config.XmlConfigurator.Configure(xmlDocument["log4net"]);
 
         }
     }

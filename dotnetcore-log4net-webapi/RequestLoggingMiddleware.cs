@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using log4net;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,10 @@ namespace dotnetcore_log4net_webapi
     public class RequestLoggingMiddleware : IMiddleware
     {
         //private readonly RequestDelegate _next;
-        private readonly ILogger _logger;
+        private readonly ILog _logger = log4net.LogManager.GetLogger("RequestLoggingMiddleware");
 
-        public RequestLoggingMiddleware(ILoggerFactory loggerFactory)
+        public RequestLoggingMiddleware()
         {
-            _logger = loggerFactory.CreateLogger<RequestLoggingMiddleware>();
         }
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -30,11 +30,12 @@ namespace dotnetcore_log4net_webapi
                 log4net.ThreadContext.Properties["isrequest"] = true;
                 log4net.ThreadContext.Properties["uniqueidentifier"] = new Guid("1f33ffb6-3f3d-49b8-9594-4fb2ca4b5aa6");
 
-                _logger.LogInformation(
-                    "Request {method} {url} => {statusCode}",
+                String message = String.Format("Request {0} {1} => {2}",
                     context.Request?.Method,
                     context.Request?.Path.Value,
                     context.Response?.StatusCode);
+
+                _logger.Info(message);
             }
         }
     }

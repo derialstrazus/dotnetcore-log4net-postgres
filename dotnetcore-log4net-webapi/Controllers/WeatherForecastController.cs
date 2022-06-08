@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using log4net;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,11 @@ namespace dotnetcore_log4net_webapi.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILog _logger = log4net.LogManager.GetLogger("WeatherForecastController");
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController()
         {
-            _logger = logger;
+            //_logger = log4net.LogManager.GetLogger("WeatherForecastController");
         }
 
         [HttpGet]
@@ -28,7 +29,7 @@ namespace dotnetcore_log4net_webapi.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             //_logger.LogDebug("API called. This is DEBUG message.");
-            _logger.LogInformation("API called. This is INFO message.");
+            _logger.Debug("API called. This is DEBUG message from webapi project.");
             //_logger.LogWarning("API called. This is WARN message.");
             //_logger.LogError("API called. This is ERROR message.");
 
